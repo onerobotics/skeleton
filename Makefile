@@ -1,7 +1,12 @@
 LS_FILES := $(wildcard src/*.ls)
-BIN_FILES = $(addprefix bin/,$(notdir $(LS_FILES:.ls=.tp)))
+KL_FILES := $(wildcard src/*.kl)
+TP_FILES = $(addprefix bin/,$(notdir $(LS_FILES:.ls=.tp)))
+PC_FILES = $(addprefix bin/,$(notdir $(KL_FILES:.kl=.pc)))
 
 bin/%.tp: src/%.ls
 	maketp $< $@
 
-all: $(BIN_FILES)
+bin/%.pc: src/%.kl
+	ktrans $< $@
+
+all: $(TP_FILES) $(PC_FILES)
