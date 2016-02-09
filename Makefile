@@ -16,9 +16,9 @@ bin/%.pc: src/%.kl
 bin/%.tx: src/%.ftx
 	kcdict $< $(dir $@)
 	mkdir -p src/includes
-	mv $(basename $(notdir $<)).kl src/includes/$(basename $(notdir $<)).kl
+	mv $(addsuffix .kl, $(basename $(notdir $<))) src/includes/$(addsuffix .kl, $(basename $(notdir $<)))
 	rm $(notdir $@)
-	rm $(basename $(notdir $@)).vr
+	rm $(addsuffix .vr, $(basename $(notdir $@)))
 
 all: $(TP_FILES) $(TX_FILES) $(PC_FILES)
 
